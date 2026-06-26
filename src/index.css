@@ -1,0 +1,419 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Custom scrollbars and styling tweaks */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.7);
+}
+
+.leaflet-container {
+  background-color: #f1f5f9 !important;
+}
+
+/* --- DARK THEME OVERRIDES --- */
+.dark .leaflet-container {
+  background-color: #020617 !important; /* slate-950 */
+}
+
+/* Base body backgrounds & typography in dark mode */
+.dark.bg-slate-50, .dark .bg-slate-50 {
+  background-color: #090d16 !important; /* deep rich dark slate */
+}
+
+/* Card and container backdrops */
+.dark .bg-white {
+  background-color: #0f172a !important; /* slate-900 */
+}
+
+/* Light gray container fields */
+.dark .bg-slate-100 {
+  background-color: #1e293b !important; /* slate-800 */
+}
+
+/* Borders */
+.dark .border-slate-200,
+.dark .border-slate-100,
+.dark .border-slate-150,
+.dark .border-slate-300,
+.dark .border-slate-200\/60,
+.dark .border-slate-100\/50,
+.dark .border-slate-150 {
+  border-color: #1e293b !important; /* slate-800 */
+}
+
+/* Form inputs & interactive widgets */
+.dark input[type="text"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+  background-color: #1e293b !important; /* slate-800 */
+  color: #f8fafc !important; /* slate-50 */
+  border-color: #334155 !important; /* slate-700 */
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #64748b !important; /* slate-500 */
+}
+
+/* Typography Overrides */
+.dark .text-slate-900,
+.dark .text-slate-800 {
+  color: #f8fafc !important; /* slate-50 */
+}
+
+.dark .text-slate-700 {
+  color: #cbd5e1 !important; /* slate-300 */
+}
+
+.dark .text-slate-600 {
+  color: #94a3b8 !important; /* slate-400 */
+}
+
+.dark .text-slate-500 {
+  color: #64748b !important; /* slate-500 */
+}
+
+.dark .text-slate-400 {
+  color: #475569 !important; /* slate-600 */
+}
+
+/* Header customization */
+.dark header {
+  background-color: rgba(15, 23, 42, 0.9) !important; /* slate-900/90 */
+  border-color: #1e293b !important;
+}
+
+/* Hover background behaviors */
+.dark .hover\:bg-slate-50:hover,
+.dark .hover\:bg-slate-100:hover,
+.dark .hover\:bg-slate-50\/50:hover,
+.dark .hover\:bg-slate-200\/50:hover {
+  background-color: #1e293b !important;
+}
+
+/* Scrollbar dark mode adjustments */
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.6);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 0.8);
+}
+
+/* Leaflet popups & controls in Dark Mode */
+.dark .leaflet-popup-content-wrapper {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border: 1px solid #1e293b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dark .leaflet-popup-tip {
+  background-color: #0f172a !important;
+}
+
+.dark .leaflet-bar a {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+  border-bottom: 1px solid #1e293b !important;
+}
+
+.dark .leaflet-bar a:hover {
+  background-color: #1e293b !important;
+}
+
+/* Sub-tab active colors in dark mode */
+.dark .border-slate-200 button {
+  color: #94a3b8;
+}
+
+.dark .border-slate-200 button.border-indigo-600 {
+  color: #6366f1;
+}
+
+/* SVG Chart customizations for dark theme */
+.dark text {
+  fill: #f8fafc !important;
+}
+.dark svg circle[fill="transparent"][stroke="#f1f5f9"] {
+  stroke: #1e293b !important;
+}
+
+/* Overlay dialogs (e.g., AI Triage dialog) */
+.dark .bg-black\/60 {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Marker Pop In & Pulsing Animations */
+@keyframes marker-pop-in {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hazard-ring-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.0);
+    opacity: 0;
+  }
+}
+
+@keyframes hazard-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 4px rgba(239, 68, 68, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 14px rgba(239, 68, 68, 0.8));
+  }
+}
+
+.marker-pop-in {
+  animation: marker-pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+.hazard-ring {
+  animation: hazard-ring-pulse 2.2s cubic-bezier(0.16, 1, 0.3, 1) infinite !important;
+  transform-origin: center !important;
+}
+
+.hazard-pulse {
+  animation: hazard-glow 1.8s ease-in-out infinite !important;
+}
+
+/* ==========================================
+   3D TACTILE THEME STYLE SYSTEM
+   ========================================== */
+
+/* Elevate headers with a solid 3D bottom bevel */
+header {
+  border-bottom: 3px solid #0f172a !important;
+  box-shadow: 0 4px 0px 0px rgba(15, 23, 42, 0.08) !important;
+}
+.dark header {
+  border-bottom: 3px solid #cbd5e1 !important;
+  box-shadow: 0 4px 0px 0px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Master 3D Cards */
+.bg-white,
+.bg-slate-900,
+.bg-slate-950\/90,
+.bg-slate-900\/95,
+.bg-slate-900\/90 {
+  border: 3px solid #0f172a !important;
+  box-shadow: 5px 5px 0px 0px #0f172a !important;
+  border-radius: 20px !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.25), box-shadow 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.25) !important;
+}
+
+.dark .bg-white,
+.dark .bg-slate-900,
+.dark .bg-slate-950\/90,
+.dark .bg-slate-900\/95,
+.dark .bg-slate-900\/90 {
+  border: 3px solid #f8fafc !important;
+  box-shadow: 5px 5px 0px 0px #f8fafc !important;
+}
+
+/* 3D Hover & Active Effects for Cards */
+.bg-white:hover,
+.bg-slate-900:hover {
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 7px 7px 0px 0px #0f172a !important;
+}
+.dark .bg-white:hover,
+.dark .bg-slate-900:hover {
+  box-shadow: 7px 7px 0px 0px #f8fafc !important;
+}
+
+/* Active clicked down effects */
+.bg-white:active,
+.bg-slate-900:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0px 0px #0f172a !important;
+}
+.dark .bg-white:active,
+.dark .bg-slate-900:active {
+  box-shadow: 2px 2px 0px 0px #f8fafc !important;
+}
+
+/* Tactile 3D Buttons */
+button,
+.button-3d {
+  border: 2.5px solid #0f172a !important;
+  box-shadow: 3.5px 3.5px 0px 0px #0f172a !important;
+  border-radius: 14px !important;
+  font-weight: 700 !important;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.2) !important;
+}
+.dark button,
+.dark .button-3d {
+  border: 2.5px solid #f8fafc !important;
+  box-shadow: 3.5px 3.5px 0px 0px #f8fafc !important;
+}
+
+button:hover:not(:disabled),
+.button-3d:hover {
+  transform: translate(-1.5px, -1.5px) !important;
+  box-shadow: 5px 5px 0px 0px #0f172a !important;
+}
+.dark button:hover:not(:disabled),
+.dark .button-3d:hover {
+  box-shadow: 5px 5px 0px 0px #f8fafc !important;
+}
+
+button:active:not(:disabled),
+.button-3d:active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 0px 0px 0px 0px #0f172a !important;
+}
+.dark button:active:not(:disabled),
+.dark .button-3d:active {
+  box-shadow: 0px 0px 0px 0px #f8fafc !important;
+}
+
+button:disabled {
+  transform: none !important;
+  box-shadow: none !important;
+  opacity: 0.6 !important;
+  border: 2px solid #94a3b8 !important;
+}
+.dark button:disabled {
+  border: 2px solid #475569 !important;
+}
+
+/* Beveled tactile inputs, selects & textareas */
+input[type="text"],
+input[type="search"],
+textarea,
+select {
+  border: 2.5px solid #0f172a !important;
+  box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,0.06), 2.5px 2.5px 0px 0px #0f172a !important;
+  border-radius: 12px !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+}
+.dark input[type="text"],
+.dark input[type="search"],
+.dark textarea,
+.dark select {
+  border: 2.5px solid #cbd5e1 !important;
+  box-shadow: inset 2px 2px 0px 0px rgba(0,0,0,0.5), 2.5px 2.5px 0px 0px #cbd5e1 !important;
+}
+
+input[type="text"]:focus,
+input[type="search"]:focus,
+textarea:focus,
+select:focus {
+  transform: translate(-1px, -1px) !important;
+  box-shadow: 4px 4px 0px 0px #0f172a !important;
+}
+.dark input[type="text"]:focus,
+.dark input[type="search"]:focus,
+.dark textarea:focus,
+.dark select:focus {
+  box-shadow: 4px 4px 0px 0px #cbd5e1 !important;
+}
+
+/* Inset 3D containers (used for dashboard charts, inner lists, and tables) */
+.bg-slate-50,
+.bg-slate-100,
+.bg-slate-900\/50 {
+  border: 2px solid #0f172a !important;
+  box-shadow: inset 3px 3px 0px 0px rgba(15, 23, 42, 0.15) !important;
+  border-radius: 14px !important;
+}
+.dark .bg-slate-50,
+.dark .bg-slate-100,
+.dark .bg-slate-900\/50 {
+  border: 2px solid #cbd5e1 !important;
+  box-shadow: inset 3px 3px 0px 0px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Special tactile badge indicators */
+.badge-3d {
+  border: 2px solid #0f172a !important;
+  box-shadow: 1.5px 1.5px 0px 0px #0f172a !important;
+  font-weight: 700 !important;
+}
+.dark .badge-3d {
+  border: 2px solid #f8fafc !important;
+  box-shadow: 1.5px 1.5px 0px 0px #f8fafc !important;
+}
+
+/* Map widget custom 3D shadows */
+.leaflet-container {
+  border: 3.5px solid #0f172a !important;
+  box-shadow: 6px 6px 0px 0px #0f172a !important;
+  border-radius: 20px !important;
+}
+.dark .leaflet-container {
+  border: 3.5px solid #f8fafc !important;
+  box-shadow: 6px 6px 0px 0px #f8fafc !important;
+}
+
+/* 3D Tab Navigation Pill containers */
+.flex.bg-slate-100 {
+  border: 2.5px solid #0f172a !important;
+  box-shadow: 3px 3px 0px 0px #0f172a !important;
+  border-radius: 16px !important;
+  padding: 3px !important;
+}
+.dark .flex.bg-slate-100 {
+  border: 2.5px solid #f8fafc !important;
+  box-shadow: 3px 3px 0px 0px #f8fafc !important;
+}
+
+/* Progress bar skeuomorphism */
+.bg-slate-200 {
+  border: 1.5px solid #0f172a !important;
+  box-shadow: inset 1px 1px 2px 0px rgba(0,0,0,0.2) !important;
+}
+.dark .bg-slate-200 {
+  border: 1.5px solid #cbd5e1 !important;
+  box-shadow: inset 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+}
+
+/* 3D Fullscreen exceptions */
+#interactive-map-container.fixed {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+}
+#interactive-map-container.fixed .leaflet-container {
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Beacon",
+  "description": "A transparent, hyperlocal platform for citizens to report, validate, track, and resolve community issues with AI-powered triaging and verification.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
