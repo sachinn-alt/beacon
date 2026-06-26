@@ -2,6 +2,8 @@
 
 > **A transparent, hyperlocal platform for citizens to report, validate, track, and resolve community infrastructure issues with AI-powered triaging and verification.**
 
+🔗 **[Live Production Web App](https://ais-pre-cn2bunjhg3x3quta3aq7xy-235786612474.asia-southeast1.run.app)** | 🛠️ **[Development Sandbox Server](https://ais-dev-cn2bunjhg3x3quta3aq7xy-235786612474.asia-southeast1.run.app)**
+
 Beacon bridges the gap between residents and neighborhood recovery. Built on a tactile, responsive **3D Neobrutalist UI/UX design language**, it offers an interactive map, dynamic stats dashboards, game-like community leaderboard mechanics, and intelligent automated validation.
 
 ---
